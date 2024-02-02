@@ -33,6 +33,7 @@
 - Favor Composition over Inheritance
   - Classes should only inherit a superclass if and only if the subclass has a "is-a" relationship. The "is-a" relationship defines that every method in the parent will be overriden with some behavior in the child. Additionally, the child itself will introduce new behavior. In other cases of object dependency where there isn't a "is-a" relationship, composition should be considered. With Composition we define only specific behavior which should be implemented not the entire interface. The object relationship for composition is a "has-a" relationship.
   - It's easier to create classes with a "has-a" relationship because there is less coupling compared to a "is-a" relationship.
+  - Composition, in a code sense, is when an object's fields are objects themselves.
 
 ## **Solid Principles**
 1. **Single Responsibility Principle** - Classes should be encapsulated to handle one responsibility
@@ -60,5 +61,16 @@ of what type of object to create. In our phone example the concrete creators wou
 ![Factory Design Pattern](https://github.com/JustinHLe/Design-Patterns/assets/25164200/a0ecb497-bcff-49c0-89e2-16e204516a97)
 
 - Picture above is a good example. We see that the creator has a factory method called createProduct() which is used to create various types of a product. In addition it has another method called someOperation() to handle business logic. The someMethod() opeartion creates a product depending on the particular object that the creator class is instantiated to and subsequently does some operations on the newly created object via the product interface. The factory pattern is effectively like a factory which handles the creation of an object and the execution of the object's business logic; the only exception is that the factory itself is entirely decoupled from any of the objects it creates and object-related business logic.
-- The factory method is utilized when we're obviously creating 
+- The factory method is utilized when
+  - Constructing an object consist of various dependencies and is a complicated process
+  - A single constructor is not expressive enough
+
+2. Abstract Factory Method
+   - An abstract factory is used when we need to create several different types of related objects. For example, in our previous example our factory could only create one type of product: phones, if we were to introduce a new product, the factory pattern would not be scalable. Imagine we would need to have a switch statement for whatever product we are going to create. The abstract factory pattern is similar to the factory pattern in the sense it is used to create objects, but varies since the abstract factory pattern is scalable when creating multiple products.
+   - The abstract factory design pattern will consist of:
+     1. **Abstract Products**: An interface containing methods for the behavior of objects created. In our abstract factory we will be handling multiple products. As an example we could have a phone product and computer product. The abstract product will declare an interface containing methods for the phone and computer. The phone interface could have an abstract call() and text() methods, while the computer interface could have 
+ abstracted methods for program() and storeData().
+     2. **Concrete Products**: A class which contains the implementations of the abstract product methods. These class implementations will additionally create the concrete. CONTINUE HERE
+     3. **Abstract Factory**: An interface contains a set of methods for creating abstract products. In our example, this interface will have two methods: createPhone() and createComputer().
+     4. **Concrete Factories**: Implements 
 
