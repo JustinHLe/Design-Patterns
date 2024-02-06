@@ -68,9 +68,19 @@ of what type of object to create. In our phone example the concrete creators wou
 2. Abstract Factory Method
    - An abstract factory is used when we need to create several different types of related objects. For example, in our previous example our factory could only create one type of product: phones, if we were to introduce a new product, the factory pattern would not be scalable. Imagine we would need to have a switch statement for whatever product we are going to create. The abstract factory pattern is similar to the factory pattern in the sense it is used to create objects, but varies since the abstract factory pattern is scalable when creating multiple products.
    - The abstract factory design pattern will consist of:
-     1. **Abstract Products**: An interface containing methods for the behavior of objects created. In our abstract factory we will be handling multiple products. As an example we could have a phone product and computer product. The abstract product will declare an interface containing methods for the phone and computer. The phone interface could have an abstract call() and text() methods, while the computer interface could have 
+     1. **Abstract Products**: An interface which contains abstracted methods for the type of proudcts we are creating. In our abstract factory we will be handling multiple products. As an example we could have a phone product and computer product. The abstract product will declare interfaces containing methods for the phone and computer. The phone interface could have an abstract call() and text() methods, while the computer interface could have 
  abstracted methods for program() and storeData().
-     2. **Concrete Products**: A class which contains the implementations of the abstract product methods. These class implementations will additionally create the concrete. CONTINUE HERE
-     3. **Abstract Factory**: An interface contains a set of methods for creating abstract products. In our example, this interface will have two methods: createPhone() and createComputer().
-     4. **Concrete Factories**: Implements 
+     2. **Concrete Products**: Actual implementation of the abstract products. Basically, the concrete products are implementations of the abstract products. For example, our concrete products for the phone interface and computer interface could be iPhone and Google Pixel and Mac and Chromebook respectively. In our example, the concrete product effectively gives "specialization" to a generic abstraction.
+     3. **Abstract Factory**: An interface which contains methods for creating abstract products. In our example we would have a HardwareFactory with abstracted methods such as createComputer() and createPhone().
+     4. **Concrete Factories**: Implements the abstract factory to return the concrete products. Continuing with our example, we would have two concrete factory classes: 1. GoogleFactory and 2. AppleFactory. The GoogleFactory would create methods for instantiating a new Google Pixel and ChromeBook, the AppleFactory would do the same for apple products. 
+  - Note: The return type for all factories (Abstract and Concrete) should be the abstract products in order to prevent the factory from being coupled to any specific product variant.
+
+  - With abstract factories there is typically a client application class. The client application contains fields for the abstract products, a constructor which accepts the abstracy factory and subsequently creates the variants for the type of concrete product, and performs business logic on the newly created products.
+    
+![Abstract Factory DP](https://github.com/JustinHLe/Design-Patterns/assets/25164200/8f71981c-04b0-454f-bc00-fd48da4be44e)
+
+- The picture above is best read from right to left. We have a client application which has a constructor that accepts a GUIFactory, the parameter will most likely be a class which implements the GUIFactory. When the constructor is invoked the button field will be initialized by the respective concrete factory to produce a concrete product. Finally, the business logic methods such as createUI() and paint() can be invoked. To avoid coupling the field button will be used in the business rule methods. Everything in the client application must use the abstracted code.
+- The abstract factory method is used when
+  - Handling multiple related products that require loose coupling
+  - The main difference between the factory design pattern and abstract design pattern is that the factory pattern is established by inheritance, while the abstract factory is established by composition.
 
