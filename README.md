@@ -82,5 +82,15 @@ of what type of object to create. In our phone example the concrete creators wou
 - The picture above is best read from right to left. We have a client application which has a constructor that accepts a GUIFactory, the parameter will most likely be a class which implements the GUIFactory. When the constructor is invoked the button field will be initialized by the respective concrete factory to produce a concrete product. Finally, the business logic methods such as createUI() and paint() can be invoked. To avoid coupling the field button will be used in the business rule methods. Everything in the client application must use the abstracted code.
 - The abstract factory method is used when
   - Handling multiple related products that require loose coupling
-  - The main difference between the factory design pattern and abstract design pattern is that the factory pattern is established by inheritance, while the abstract factory is established by composition.
+  - The main difference between the factory design pattern and abstract design pattern is that the factory pattern is established by inheritance, while the abstract factory is established by composition. The factory pattern defines an abstraction for creating objects but delegates implementation of the abstraction to the subclasses. In addition, the interface will refer to the newly created objects through a common interface. The abstract factory pattern instantiates and refers to its objects through composition (the application's fields are most likely abstract products). The instantiation process for an abstract factory will depend on what type of factory is required as part of business rules. Remember that abstract factory pattern is more or less a super factory which produces factories. These factories in turn produce the products. The abstract factory patterns helps us produce variants of the same products.
+  - The main similarities between the factory design pattern and the abstract design pattern is that both are creational design patterns which abstract object creation. In addition, both have a notion of a certain product  to create as well as defining behavior for said products.
+
+3. Builder Pattern
+  - The builder pattern allows an object to be created step-by-step and with the minimal requirements necessary.
+  - The builder pattern is useful when we want to create variants of an object without having to create an overly complicated constructed or having to create a subclass for each object variant
+  - The builder pattern will consist of
+    1. **Builder Interface**: An interface which declares product construction steps. For example, if we are creating a PC we could have a builder interface with methods such as withGPU(), withMotherBoard(), withCPU().
+    2. **Concrete Builders**: Actual implementation of the builder interface which inevitably creates a new product. The products created from the concrete builders don't have to be related to the common builder interface. For example, we could have a PCBuilder which implements the methods from the builder interface and we could have a GamingConsoleBuilder which implements the same methods from the method. Notice that a PC is not inherently related to a gaming console.
+    3. **Products**: 
+   
 
