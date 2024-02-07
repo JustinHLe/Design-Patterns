@@ -44,10 +44,10 @@
 
 ## **Design Patterns**
 
-  ### **Creational Design Patterns**
+  ## **Creational Design Patterns**
   Common patterns describing various ways of object creation
 
-1. Factory Method
+### 1. Factory Method
   - The factory method is used for object creation. It will define an interface (abstract or interface) for creating objects and any subclasses which inherit this interface will instantiate the respective objects to create. The factory method contains four elements.
     1. **Product**: An interface containing methods for the behavior of objects created by the creator, effectively like a generic interface for the type of products the program is creating. An example of what the product interface would be is simply a phone interface for phone behavior. A phone can have methods such as call() or text(), but at the same time there can be different types of phones.
     2. **Concrete Products**: Actual Implementations of the product interface. An example of concrete products would be the actual implementation of the phone interface. For example we could have
@@ -65,7 +65,7 @@ of what type of object to create. In our phone example the concrete creators wou
   - Constructing an object consist of various dependencies and is a complicated process
   - A single constructor is not expressive enough
 
-2. Abstract Factory Method
+### 2. Abstract Factory Method
    - An abstract factory is used when we need to create several different types of related objects. For example, in our previous example our factory could only create one type of product: phones, if we were to introduce a new product, the factory pattern would not be scalable. Imagine we would need to have a switch statement for whatever product we are going to create. The abstract factory pattern is similar to the factory pattern in the sense it is used to create objects, but varies since the abstract factory pattern is scalable when creating multiple products.
    - The abstract factory design pattern will consist of:
      1. **Abstract Products**: An interface which contains abstracted methods for the type of proudcts we are creating. In our abstract factory we will be handling multiple products. As an example we could have a phone product and computer product. The abstract product will declare interfaces containing methods for the phone and computer. The phone interface could have an abstract call() and text() methods, while the computer interface could have 
@@ -85,10 +85,10 @@ of what type of object to create. In our phone example the concrete creators wou
   - The main difference between the factory design pattern and abstract design pattern is that the factory pattern is established by inheritance, while the abstract factory is established by composition. The factory pattern defines an abstraction for creating objects but delegates implementation of the abstraction to the subclasses. In addition, the interface will refer to the newly created objects through a common interface. The abstract factory pattern instantiates and refers to its objects through composition (the application's fields are most likely abstract products). The instantiation process for an abstract factory will depend on what type of factory is required as part of business rules. Remember that abstract factory pattern is more or less a super factory which produces factories. These factories in turn produce the products. The abstract factory patterns helps us produce variants of the same products.
   - The main similarities between the factory design pattern and the abstract design pattern is that both are creational design patterns which abstract object creation. In addition, both have a notion of a certain product  to create as well as defining behavior for said products.
 
-3. Builder Pattern
+### 3. Builder Pattern
   - The builder pattern allows an object to be created step-by-step and with the minimal requirements necessary.
   - The builder pattern is useful when we want to create variants of an object without having to create an overly complicated constructed or having to create a subclass for each object variant
-  - The builder pattern will consist of
+  - The builder pattern will consist of:
     1. **Builder Interface**: An interface which declares product construction steps. For example, if we are creating a PC we could have a builder interface with methods such as withGPU(), withMotherBoard(), withCPU().
     2. **Concrete Builders**: Actual implementation of the builder interface which inevitably creates a new product. The products created from the concrete builders don't have to be related to the common builder interface. For example, we could have a PCBuilder which implements the methods from the builder interface and we could have a GamingConsoleBuilder which implements the same methods from the method. Notice that a PC is not inherently related to a gaming console.
     3. **Products**: 
