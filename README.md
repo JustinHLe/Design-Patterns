@@ -87,10 +87,69 @@ of what type of object to create. In our phone example the concrete creators wou
 
 ### 3. Builder Pattern
   - The builder pattern allows an object to be created step-by-step and with the minimal requirements necessary.
-  - The builder pattern is useful when we want to create variants of an object without having to create an overly complicated constructed or having to create a subclass for each object variant
+  - The builder pattern is useful when we want to create variants of an object without having to create an overly complicated constructor or having to create a subclass for each object variant
   - The builder pattern will consist of:
     1. **Builder Interface**: An interface which declares product construction steps. For example, if we are creating a PC we could have a builder interface with methods such as withGPU(), withMotherBoard(), withCPU().
-    2. **Concrete Builders**: Actual implementation of the builder interface which inevitably creates a new product. The products created from the concrete builders don't have to be related to the common builder interface. For example, we could have a PCBuilder which implements the methods from the builder interface and we could have a GamingConsoleBuilder which implements the same methods from the method. Notice that a PC is not inherently related to a gaming console.
-    3. **Products**: 
+    2. **Concrete Builders**: Actual implementation of the builder interface which inevitably creates a new product. The products created from the concrete builders don't have to be related to the common builder interface. For example, we could have a PCBuilder which implements the methods from the builder interface and we could have a GamingConsoleBuilder which implements the same methods from the interface. Notice that a PC is not inherently related to a gaming console.
+    3. **Products**: The actual product object created by the concrete builders. In our example we would have a PC and GamingConsole object and their respective classes which contains behavioral methods. The classes will typically contain getters and business logic.
+    4. **Director**: An optional class which defines an order for step creation. The director allows for different objects to be constructed by interacting with the common builder interface. The different types of objects constructed will be dictated by which concrete builder is passed to the director. For example, we could have a director class called HardwareStore. The hardware store has no notion of what builder is being utilized, it is only aware of how to build something. For example, the client will typically invoke the director and pass a concrete builder into its constructor. The director object then can invoke any of its builder methods constructing whatever object is required from the concrete builder. In our example, we could invoke the director class with an instance of our PCBuilder. From there the director can call a method called constructPC() which utilizes the polymorphic builder interface to create a PC object. Alternatively, we could invoke the director class with an instance of our GamingConsoleBuilder and do the same.
    
+       
+![Builder Design Pattern](https://github.com/JustinHLe/Design-Patterns/assets/25164200/8aa3105f-9847-4a30-85d8-017d4ffc7b22)
 
+- The picture above visualizes the design pattern. The entry point is the client which invokes one of the director's methods with an instance of the CarBuilder(). The director is told by the client to make a sportsCar using the carBuilder. By following its commands, the director utilizes the builder interface to construct the sports car. The director is able to call upon the generic builder interface since the car builder implements the interface. The fact that the builder works with a generic interface allows us to create different objects such as a Car or Car Manual. Once the builder finishes construction, we can create a new product object by invoking the concrete builder's (in our case the Car Builder) result() method which returns a new Car instance.
+- The builder object is typically used when we want to construct an object with many fields, but don't want a bloated constructor. 
+
+Example Code: 
+```
+public class Pizza {
+  private int size;
+  private boolean cheese;
+  private boolean pepperoni;
+  private boolean bacon;
+
+  public static class Builder {
+    //required
+    private final int size;
+
+    //optional
+    private boolean cheese = false;
+    private boolean pepperoni = false;
+    private boolean bacon = false;
+
+    public Builder(int size) {
+      this.size = size;
+    }
+
+    public Builder cheese(boolean value) {
+      cheese = value;
+      return this;
+    }
+
+    public Builder pepperoni(boolean value) {
+      pepperoni = value;
+      return this;
+    }
+
+    public Builder bacon(boolean value) {
+      bacon = value;
+      return this;
+    }
+
+    public Pizza build() {
+      return new Pizza(this);
+    }
+  }
+
+  private Pizza(Builder builder) {
+    size = builder.size;
+    cheese = builder.cheese;
+    pepperoni = builder.pepperoni;
+    bacon = builder.bacon;
+  }
+}
+
+```
+
+### 4. Prototype
+  - The prototype design pattern allows an object to be cloned without creating any code dependency on the class of the object being cloned. The important thing to remember here is that cloning does not refer to creating another instance which points to the same object in memory, rather a new object is created from a base object which contains the base's fields. 
