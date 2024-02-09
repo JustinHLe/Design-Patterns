@@ -152,4 +152,11 @@ public class Pizza {
 ```
 
 ### 4. Prototype
-  - The prototype design pattern allows an object to be cloned without creating any code dependency on the class of the object being cloned. The important thing to remember here is that cloning does not refer to creating another instance which points to the same object in memory, rather a new object is created from a base object which contains the base's fields. 
+  - The prototype design pattern allows an object to be cloned without creating any code dependency on the class of the object being cloned. The important thing to remember here is that cloning does not refer to creating another instance which points to the same object in memory, rather a new object is created from a base object which contains the base's fields. A common interface which contains a clone method is typically utilized to decouple an object from its class when cloning. The interface will be used to invoke the clone method and depending on which object the interface type is instantiated to will invoke the clone method respectively. 
+  - The prototype design pattern is coined by the fact that an initial object acts as a prototype containing all the data required to create duplicates of itself.
+  - A shallow copy does not create a new object but rather references the same object as the cloners'. A deepy copy will prodce a new object and will not reference the same object as the cloners'. 
+  - The prototype design pattern will consist of:
+    1. **A prototype interface**: The interface is typically an abstract class which defines a clone() method.
+    2. **Concrete Prototype**: A class which extends the prototype interface and implements the clone method. Any objects which extend the prototype interface are objects suitable for cloning.
+    3. **Client**: The client will typically accept any concrete prototype and invoke the clone method. The client is the thing which allows us to decouple our object from the class. This is due to the fact that the client will only interact with the concrete prototype through their interface type.
+    4. **Prototype Registry**: A prototype registry is sort of like a cache. It is typically a java class that stores prototypes which are made available for cloning. The prototype registry class will typically contain a map and whenever a key is retrieved a clone of the key's value will be returned. 
