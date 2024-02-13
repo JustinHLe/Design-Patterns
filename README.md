@@ -159,4 +159,39 @@ public class Pizza {
     1. **A prototype interface**: The interface is typically an abstract class which defines a clone() method.
     2. **Concrete Prototype**: A class which extends the prototype interface and implements the clone method. Any objects which extend the prototype interface are objects suitable for cloning.
     3. **Client**: The client will typically accept any concrete prototype and invoke the clone method. The client is the thing which allows us to decouple our object from the class. This is due to the fact that the client will only interact with the concrete prototype through their interface type.
-    4. **Prototype Registry**: A prototype registry is sort of like a cache. It is typically a java class that stores prototypes which are made available for cloning. The prototype registry class will typically contain a map and whenever a key is retrieved a clone of the key's value will be returned. 
+    4. **Prototype Registry**: A prototype registry is sort of like a cache. It is typically a java class that stores prototypes which are made available for cloning. The prototype registry class will typically contain a map and whenever a key is retrieved a clone of the key's value will be returned.
+    
+![Prototype DP](https://github.com/JustinHLe/Design-Patterns/assets/25164200/b18a63f9-89a8-43c2-846e-f2cc38b79118)
+
+- The above image demonstrates the clone design pattern. The shape is our prototype interface which contains an abstracted method called clone. The concrete prototypes, rectangle and circle, implement the shape interface and clone method. Typically, most clone methods will invoke `return new Object(this)` (e.g. `new Circle(this`); the constructor will typically invoke the super constructor while passing in `this` to clone any fields from the parent if any. In our case, rectangle/circle will invoke the super class constructor in `Shape`.
+- The prototype design pattern is typically used in cases where an object with the same data needs to be created. For example, if a network request returns the same JSON, instead of initializing a new object on every request we can simply create a prototype and return it instead of having to make a network call. The prototype pattern can also be used as a substitute for object creation. For example, if we want to create multiple objects with slight differences from the same class we can either create a subclass for each unique object or create a prototype of each object and provide a clone of the object itself when required. Finally, the prototype interface allows some form of abstraction, instead of depending on a concrete class to clone (which is typically the case during runtime) we can invoke `clone` on a common interface which allows us decouple our relationship with concrete classes.
+
+### 5. Singleton
+  - The singleton design pattern allows a class to produce only instance for itself throughout the entire application. 
+  - See code example below for design:
+```
+// Class declared as final to prevent extension
+public final class MySingleton {
+    private static MySingleton INSTANCE = new MySingleton();
+
+    private MySingleton() { // private constructor cannot instantiate new object outside of this class    
+    }
+    
+    // global access to singleton
+    // 
+    // 
+    public static MySingleton getInstance() { 
+      return INSTANCE;
+    }
+}
+
+public class MyMainClass() {
+   public static void main(String[] args) {
+        // MySingleton class loaded in JVM, class loading occurs when information about a class is required
+        // 
+ 	MySingleton mySingleton = MySingleton.getInstance(); 
+   }
+}
+```
+
+
