@@ -167,31 +167,32 @@ public class Pizza {
 - The prototype design pattern is typically used in cases where an object with the same data needs to be created. For example, if a network request returns the same JSON, instead of initializing a new object on every request we can simply create a prototype and return it instead of having to make a network call. The prototype pattern can also be used as a substitute for object creation. For example, if we want to create multiple objects with slight differences from the same class we can either create a subclass for each unique object or create a prototype of each object and provide a clone of the object itself when required. Finally, the prototype interface allows some form of abstraction, instead of depending on a concrete class to clone (which is typically the case during runtime) we can invoke `clone` on a common interface which allows us decouple our relationship with concrete classes.
 
 ### 5. Singleton
-  - The singleton design pattern allows a class to produce only instance for itself throughout the entire application. 
+  - The singleton design pattern allows a class to produce only one instance for itself throughout the entire application. Limiting the number of instances is typically used to control access to a shared resource. A shared resource can be a database connection, a file, or a logging class.
   - See code example below for design:
 ```
 // Class declared as final to prevent extension
 public final class MySingleton {
-    private static MySingleton INSTANCE = new MySingleton();
+    private MySingleton() {} // private constructor cannot instantiate new object outside of this class  
 
-    private MySingleton() { // private constructor cannot instantiate new object outside of this class    
+    private static class Holder {
+	private static final INSTANCE = new MySingleton();
     }
-    
-    // global access to singleton
-    // 
-    // 
+
     public static MySingleton getInstance() { 
-      return INSTANCE;
+      return Holder.INSTANCE;
     }
 }
 
 public class MyMainClass() {
    public static void main(String[] args) {
-        // MySingleton class loaded in JVM, class loading occurs when information about a class is required
-        // 
+        // MySingleton class loaded in JVM, class loading occurs when information about a class is required 
+        // When we invoke the getInstance method, information about the class's getInstance method is required, hence the class is loaded in the JVM
+	// Loading classes in the JVM is inherently synchronous
+	// MySingleton mySingleton = null - this example would not load the class, no information about the MySingleton class is required all we are doing is assigning a variable to the class's type.
  	MySingleton mySingleton = MySingleton.getInstance(); 
    }
 }
 ```
+  - The above example is an example of a lazy loaded singleton pattern. When our MySingleton class is loaded into the JVM and subsequently initialized, nothing will happen since the class does not contain any static intializers. When we invoke the MySingleton.getInstance() method, the inner class `Holder` is loaded and initialized. The `Holder` class contains a static field which will be initialized to an instance of the MySingleton class. The INSTANCE is initialized since it is a static field which is inherently loaded during class initialization. The class initialization phase is guaranteed to be sequential, therefore thread-safe. Subsequently calls to getInstance will return the same instance since static intialization blocks are only executed once.
 
 
