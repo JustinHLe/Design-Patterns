@@ -198,4 +198,8 @@ public class MyMainClass() {
      2. At this point we have an instance of the Holder class in memory and the Holder class itself contains all of its static data.
      3. On subsequent invocations of the getInstance() method, we do not reload the class since the class itself has already been loaded. Successive calls will return the preloaded Holder class and any of its static data, hence why new Singleton() is not invoked again.
 
+  ## **Structural Design Patterns**
+
+### **Adapter**
+  - An adapter is a structural design pattern which is used to convert data to specific formats for compatibility.  
 
