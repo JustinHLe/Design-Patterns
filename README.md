@@ -201,5 +201,16 @@ public class MyMainClass() {
   ## **Structural Design Patterns**
 
 ### **Adapter**
-  - An adapter is a structural design pattern which is used to convert data to specific formats for compatibility.  
+  - An adapter is a structural design pattern which is used to convert data to specific formats for compatibility. In essence it converts the type of an object to be compatible with another object.
+  - An adapter consists of
+      1. The client which contains some business logic of the program
+      2. A service, which is typically a class that client is trying to interact with, but cannot, due to incompatibilities
+      3. A client interface, an interface that is used to interact with the client
+      4. An adapter - A class that "bridges" the client and service. The adapter will implement the client interface and wrap the service object.
+  - At a high level the adapter interface works as follow: We have a client that executes some business logic for our application. Most, if not all, business logic will be handled through a common client interface, meaning the client will invoke the client interface to perform any actions. This interface will typically work with a very specific type of data. However, during runtime the type of data is unknown. In order to resolve the type of data we utilize an adapter class which extends the client and overrides its business logic methods. Additionally, the adapter will utilize object composition to contain a field of the unknown data object. The field will be referenced in the overriden method.
+  - In more simpler terms, the adapter will override an interface method, causing the adapter's method to be invoked. Object compatibility will come into play since the adapter will contain a field of the unknown object data. The field will be utilized in the overriden method.
+
+![image](https://github.com/JustinHLe/Design-Patterns/assets/25164200/cba63429-48dc-4eed-b813-2a748e08c30a)
+
+  - I will explain once again using the image above. We have a client which calls upon a common interface to execute business logic. The interface expects a specific type of data that is passed in by the client. This works fine when data that is passed in to the interface is compatible. However, our client may also invoke the interface method with a different type of data. In this case, the interface cannot accept whatever is being passed in. Instead of passing in this different data directly, the adapter is passed in. The adapter is accepted by the interface since it extends the particular interface. The adapter class will contain a field of the differing data type. 
 
