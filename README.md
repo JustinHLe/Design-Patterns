@@ -216,4 +216,19 @@ public class MyMainClass() {
 
 ### **Bridge Design Pattern**
   - The bridge design pattern aims to decouple an abstraction and implementation. In context of the bridge pattern, an abstraction refers to the control layer; a layer which handles communication and updates between the view and data model. The abstraction shouldn't perform any low-level work, but rather relinquish the work to the implementation and its implementors. The implementation can be similarly viewed as the model layer in context of the MVC pattern.
-  - An example of the bridge pattern is a computer as the abstraction and operating system as the implementation. The computer will handle high-level activities such as rendering display, handling I/O, and providing power. The operating system is an implementation and will handle low-level activities such as 
+  - An example of the bridge pattern is computer hardware and peripherals as the abstraction and operating system as the implementation. The computer will handle high-level activities such as rendering display, handling I/O, and providing power. The operating system is an implementation and will handle low-level activities. There can be various implementations of different operating systems such as MacOS, Windows, and Linux.
+  - The bridge pattern consists of:
+      1. The abstraction which is a class that contains high level control logic
+      2. The implementation which is typically a generic interface and contains the low level methods yet to be implemented by its implementors. The implementation is composed in the abstraction. This allows the abstraction to work with multiple different implementors
+      3. Concrete implementations - defined subclasses of the the generic implementation
+      4. Refined abstractions - Similar to concrete implementations; this allows for different variations of the abstraction (controller)
+    
+   ![Bridge](https://github.com/JustinHLe/Design-Patterns/assets/25164200/239cf469-8edb-4d78-b23a-904697182417)
+
+  - The above image is a representation of the bridge design pattern. The remote is an abstraction which has-a device implementation. The remote contains high-level logic of a basic remote controller, but also has a subclass called AdvancedRemote which allows for variation/addition of the same high level logic. The device is the implementation and contains generic low-level code for a particular device. Any of its implementors such as radio and tv will implement this low-level code accordingly. The main thing to note is that the abstraction, remote, will only interact with the generic implementation, this allows for different implementors to be used with the same remote; depending on what is passed in by the client.
+
+### **Composite**
+  - The Composite design pattern is a structural design pattern that organizes various objects into a tree structure. The client will treat individual objects of the tree and compositions of objects through a generic interface.
+  - The composite design pattern works well when objects in an application can be organized in some kind of hierarchy. 
+
+ 
