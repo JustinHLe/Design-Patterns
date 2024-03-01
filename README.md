@@ -229,6 +229,16 @@ public class MyMainClass() {
 
 ### **Composite**
   - The Composite design pattern is a structural design pattern that organizes various objects into a tree structure. The client will treat individual objects of the tree and compositions of objects through a generic interface.
-  - The composite design pattern works well when objects in an application can be organized in some kind of hierarchy. 
+  - The composite design pattern works well when objects in an application can be organized in some kind of hierarchy.
+  - The driving purpose of the composite design pattern allows a client to work recursively through different types of objects. The objects will typically implement a common interface and declare method behavior accordingly. Typically, a tree can consist of multiple nodes, in these cases we have to perform a "DFS" by first executing methods on the leaf nodes and then taking the result and passing it to its relative parent to continue execution. The composite design pattern is similar to the DFS algorithm where leaf nodes are first considered and in a way we "recursively" move back up the tree.
+  - The composite design pattern consists of:
+      1. The component interface which is basically a generic interface used to declare methods to be implemented in by the leaf nodes and any root nodes.
+      2. The leaf is a "node" without any children.
+      3. A container (aka composite / root node) is a node with children. A container doesn't know the concrete classes of any of its children, rather it works through its children's common interface. In addition, the container shouldn't do any real work unless it contains another container, almost all low-level work will be handled by its children
+      4. 
+![composite design pattern](https://github.com/JustinHLe/Design-Patterns/assets/25164200/555b83b7-487b-4e9d-8cb8-7454fab42756)
+
+  - The image above represents the composite design pattern. We have a component interface which declares methods to be implemented. An example of a component interface would be like a shape interface, it will have methods to getXDimension(),  getYDimension(), and calculateArea(). The leaf nodes define concrete classes that implement the interface, typically these leaf nodes will NOT contain any children. Examples of leaf nodes can be Square, Circle, and Triangle. Finally, the composite will also implement the component interface and declare methods accordingly. The main difference between the composite and leaf nodes is that the composite can contain multiple leaf nodes. An example of the composite could be the Package class. The package will contain an List of leaves and will reference the leaves by their interface. When we have to execute some work on the Package we will typically have to loop through each of its children and recursively call the invoking method on each child. 
+
 
  
