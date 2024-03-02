@@ -15,8 +15,26 @@
 2. **Association** - A class is tightly coupled with another class meaning it holds a reference to it via the class' field
 3. **Aggregation** - An object can exist independently from the class which owns it, subset of association
    * The object may live on if the parent is destroyed
+     ```
+     public class MyClass {
+       private Object obj;
+
+       public void setObject(Object obj){
+         this.obj = obj; // object is passed in here and can exist when MyClass is destroyed
+       } 
+     }
+     ```
 4. **Composition** - An object cannot exist indendently from the class which owns it, subset of association
    * The object is destroyed when its parent is destroyed
+     ```
+     public class MyClass {
+       private Object obj;
+
+       public MyClass(){
+         obj = new Object(); // main difference from aggregation, the object is initialized here and lives within the MyClass Object
+       } 
+     }
+     ```
 
 ## **Design Patterns**
 
@@ -240,5 +258,22 @@ public class MyMainClass() {
 
   - The image above represents the composite design pattern. We have a component interface which declares methods to be implemented. An example of a component interface would be like a shape interface, it will have methods to getXDimension(),  getYDimension(), and calculateArea(). The leaf nodes define concrete classes that implement the interface, typically these leaf nodes will NOT contain any children. Examples of leaf nodes can be Square, Circle, and Triangle. Finally, the composite will also implement the component interface and declare methods accordingly. The main difference between the composite and leaf nodes is that the composite can contain multiple leaf nodes. An example of the composite could be the Package class. The package will contain an List of leaves and will reference the leaves by their interface. When we have to execute some work on the Package we will typically have to loop through each of its children and recursively call the invoking method on each child. 
 
+### **Decorator**
+  - The decorator design pattern aka wrapper design pattern is a structural design pattern which can modify the existing behavior of an object by overriding the original calls from a decorator class.
+  - The decorator pattern is somewhat similar to the adapter pattern, however the differences are:
+     1. The adapter pattern deals with incompatible interfaces, where as the decorator extends preexisting object behavior at runtime.
+  - However, both utilize aggregation/composition
+  - At its core the decorator design pattern will also contain a generic interface with methods to implement. A client will interact with this interface to perform business logic. The decorator design pattern comes into play when we want to extend existing behavior of an object. The core structure of our program will consist of an object which implements the interface we previously defined, however during runtime modification of this object's behavior is not possible. In order to modify the object's behavior at runtime a decorator class is utilized. The decorator class will implement the generic interface and contain a field of the interface's type. This allows the decorator to work with all objects that extend the interface. Typically, any methods in the decorator class will be invoked by the interface's type field. Any classes which extend the base decorator will have to implements its own definitions of the interface methods and by doing so can modify any data passed to the methods before calling the super method if required. Since the child classes of the base decorator class can modify data that is passed to it, the behavior of the object in the base decorator can be "extended".
+- The decorator pattern will consist of:
+    1. A component interface which is the common interface of the decorator and the object whose data we are trying to extend
+    2. Concrete Component - A class which implements the component interface
+    3. Base Decorator - A class which contains a field of the component interface, all operations will be delegated to this wrapped object
+    4. Concrete Decorator - Any classes which extend the base decorator and can define methods which modify data before/after passing it the base decorator for execution. 
 
+  <img width="674" alt="Screenshot 2024-03-02 at 3 34 57 PM" src="https://github.com/JustinHLe/Design-Patterns/assets/25164200/a1e0063a-d25b-41d5-aaa3-2a9428c0c510">
+
+- The image above is a representation of the decorator pattern. We have a generic interface called data source which has methods for reading and writing to a file. We have our component called FileDataSource which implements the interface and provides its own definitions for the interface's methods as well as any other additional behaviors. The decorator is represented by the class DataSourceDecorator which also implements the datasource interface. The DatasourceDecorator has a wrapped object of DataSource type which can be utilized in any of its methods. The concrete decorators, Encryption and Compression, extend the DatasourceDecorator class and provide their own implementation of the interface methods. Typically, the methods of the Encryption and Compression class will modify data before/after calling the super implementation of the invoked method. As an example, the encryption's writeData method will be called which will encrypt some data, after data is encrypted the writeData method will invoke the super implementation of writeData which will be the DataSourcDecorator. Finally, the DataSourceDecorator writeData method will invoke the writeData method defined by the wrapped object. In this case the wrapped object will write the data to a file. So in a sense, we have modified the wrapped object's writeData method by first encrypting the data before writing.
+
+### **Facade**
+  - 
  
