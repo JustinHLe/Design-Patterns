@@ -275,5 +275,16 @@ public class MyMainClass() {
 - The image above is a representation of the decorator pattern. We have a generic interface called data source which has methods for reading and writing to a file. We have our component called FileDataSource which implements the interface and provides its own definitions for the interface's methods as well as any other additional behaviors. The decorator is represented by the class DataSourceDecorator which also implements the datasource interface. The DatasourceDecorator has a wrapped object of DataSource type which can be utilized in any of its methods. The concrete decorators, Encryption and Compression, extend the DatasourceDecorator class and provide their own implementation of the interface methods. Typically, the methods of the Encryption and Compression class will modify data before/after calling the super implementation of the invoked method. As an example, the encryption's writeData method will be called which will encrypt some data, after data is encrypted the writeData method will invoke the super implementation of writeData which will be the DataSourcDecorator. Finally, the DataSourceDecorator writeData method will invoke the writeData method defined by the wrapped object. In this case the wrapped object will write the data to a file. So in a sense, we have modified the wrapped object's writeData method by first encrypting the data before writing.
 
 ### **Facade**
-  - 
+  - A facade design pattern is merely an interface or class which provides a high level abstraction of low level code.
+  - An example is if we had some really complex code / classes that we wanted to abstract and instead of invoking their operations directly from the client, a Facade class could be used to abstract the complexity into a single method. Subsequently, the method can be invoked from the client making things easier to read.
+  - A facade will consist of
+      1. Facade class - a class which provides methods for utilizing lower level code or complex code with a goal to abstract the complexity and the lower level stuff into readable methods.
+  - That is basically it
+
+<img width="701" alt="Screenshot 2024-03-02 at 4 05 09 PM" src="https://github.com/JustinHLe/Design-Patterns/assets/25164200/4ed39b08-1d60-431f-90ce-18bab4327c71">
+
+- The image above demonstrates the Facade design pattern. The lower level, complex subystem classes are abstracted into simpler methods defined in the Facade. Note that the Facade will do all the heavy lifting in terms of working with the lower level code. Once the Facade class is constructed the client will invoke the abstracted methods defined by the facade.
+
+### **Flyweight**
+  - Flyweight is simply a cache where duplicate or resuable data is extracted from the object itself and stored in a data structure where it can then be fetched. More specifically, extrinsic data should be extracted out of an object and stored in a data structure while intrinsic data should remain. Intrinsic data is data that is static for a certain object and lives within it, while extrinsic data is dynamic and can be accessed outside of the object.
  
