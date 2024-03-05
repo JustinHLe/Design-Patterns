@@ -286,5 +286,18 @@ public class MyMainClass() {
 - The image above demonstrates the Facade design pattern. The lower level, complex subystem classes are abstracted into simpler methods defined in the Facade. Note that the Facade will do all the heavy lifting in terms of working with the lower level code. Once the Facade class is constructed the client will invoke the abstracted methods defined by the facade.
 
 ### **Flyweight**
-  - Flyweight is simply a cache where duplicate or resuable data is extracted from the object itself and stored in a data structure where it can then be fetched. More specifically, extrinsic data should be extracted out of an object and stored in a data structure while intrinsic data should remain. Intrinsic data is data that is static for a certain object and lives within it, while extrinsic data is dynamic and can be accessed outside of the object.
+  - Flyweight is simply a cache where duplicate or resuable data is extracted from the object itself and stored in a data structure where it can then be fetched. More specifically, extrinsic data should be extracted out of an object and stored in a data structure while intrinsic data should remain. Intrinsic data is data that is static for a certain object and lives within it, while extrinsic data is dynamic and can be accessed outside of the object. Extrinsic state can vary between objects, while intrinsic state should remain static throughout an object's lifecycle.
+  - A flyweight refers to the object that only stores intrinsic state.
+  - The flyweight design pattern consists of:
+      1. The Flyweight class which is effectively an object that contains the intrinisic state (invariant state)
+      2. A context class which contains the extrinsic state
+      3. The client handles the extrinsic state for the flyweight and retrieves or sets the flyweight objects given some extrinsic data.
+      4. Flyweight factory, effectively a cache which caches different flyweight types or inserts into the cache if the flyweight type isn't found
+   
+![Flyweight](https://github.com/JustinHLe/Design-Patterns/assets/25164200/70aaf897-19f6-4676-a6b6-88ae6e2524e1)
+
+![Flyweight example](https://github.com/JustinHLe/Design-Patterns/assets/25164200/887aca4b-73a5-496a-8d4f-e9ee7122771e)
+
+The image above is a representation of the flyweight design pattern. The Forest class is effectively a client which has a plantTree method. The plantTree method will retrieve a TreeType from the TreeType factory and then create a Tree object given some random extrinsic data. The intrinsic data for the flyweight (Treetype) is name, color, and texture, while the extrinsic data is the coordinates (x,y). The TreeFactory contains a HashMap of keys containing names which reference a specific flyweight object. 
+
  
