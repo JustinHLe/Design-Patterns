@@ -218,7 +218,7 @@ public class MyMainClass() {
 
   ## **Structural Design Patterns**
 
-### **Adapter**
+### **1. Adapter**
   - An adapter is a structural design pattern which is used to convert data to specific formats for compatibility. In essence it converts the type of an object to be compatible with another object.
   - An adapter consists of
       1. The client which contains some business logic of the program
@@ -232,7 +232,7 @@ public class MyMainClass() {
 
   - I will explain once again using the image above. We have a client which calls upon a common interface to execute business logic. The interface expects a specific type of data that is passed in by the client. This works fine when data that is passed in to the interface is compatible. However, our client may also invoke the interface method with a different type of data. In this case, the interface cannot accept whatever is being passed in. Instead of passing in this different data directly, the adapter is passed in. The adapter is accepted by the interface since it extends the particular interface. The adapter class will contain a field of the differing data type. 
 
-### **Bridge Design Pattern**
+### **2. Bridge**
   - The bridge design pattern aims to decouple an abstraction and implementation. In context of the bridge pattern, an abstraction refers to the control layer; a layer which handles communication and updates between the view and data model. The abstraction shouldn't perform any low-level work, but rather relinquish the work to the implementation and its implementors. The implementation can be similarly viewed as the model layer in context of the MVC pattern.
   - An example of the bridge pattern is computer hardware and peripherals as the abstraction and operating system as the implementation. The computer will handle high-level activities such as rendering display, handling I/O, and providing power. The operating system is an implementation and will handle low-level activities. There can be various implementations of different operating systems such as MacOS, Windows, and Linux.
   - The bridge pattern consists of:
@@ -245,7 +245,7 @@ public class MyMainClass() {
 
   - The above image is a representation of the bridge design pattern. The remote is an abstraction which has-a device implementation. The remote contains high-level logic of a basic remote controller, but also has a subclass called AdvancedRemote which allows for variation/addition of the same high level logic. The device is the implementation and contains generic low-level code for a particular device. Any of its implementors such as radio and tv will implement this low-level code accordingly. The main thing to note is that the abstraction, remote, will only interact with the generic implementation, this allows for different implementors to be used with the same remote; depending on what is passed in by the client.
 
-### **Composite**
+### **3. Composite**
   - The Composite design pattern is a structural design pattern that organizes various objects into a tree structure. The client will treat individual objects of the tree and compositions of objects through a generic interface.
   - The composite design pattern works well when objects in an application can be organized in some kind of hierarchy.
   - The driving purpose of the composite design pattern allows a client to work recursively through different types of objects. The objects will typically implement a common interface and declare method behavior accordingly. Typically, a tree can consist of multiple nodes, in these cases we have to perform a "DFS" by first executing methods on the leaf nodes and then taking the result and passing it to its relative parent to continue execution. The composite design pattern is similar to the DFS algorithm where leaf nodes are first considered and in a way we "recursively" move back up the tree.
@@ -253,12 +253,11 @@ public class MyMainClass() {
       1. The component interface which is basically a generic interface used to declare methods to be implemented in by the leaf nodes and any root nodes.
       2. The leaf is a "node" without any children.
       3. A container (aka composite / root node) is a node with children. A container doesn't know the concrete classes of any of its children, rather it works through its children's common interface. In addition, the container shouldn't do any real work unless it contains another container, almost all low-level work will be handled by its children
-      4. 
 ![composite design pattern](https://github.com/JustinHLe/Design-Patterns/assets/25164200/555b83b7-487b-4e9d-8cb8-7454fab42756)
 
   - The image above represents the composite design pattern. We have a component interface which declares methods to be implemented. An example of a component interface would be like a shape interface, it will have methods to getXDimension(),  getYDimension(), and calculateArea(). The leaf nodes define concrete classes that implement the interface, typically these leaf nodes will NOT contain any children. Examples of leaf nodes can be Square, Circle, and Triangle. Finally, the composite will also implement the component interface and declare methods accordingly. The main difference between the composite and leaf nodes is that the composite can contain multiple leaf nodes. An example of the composite could be the Package class. The package will contain an List of leaves and will reference the leaves by their interface. When we have to execute some work on the Package we will typically have to loop through each of its children and recursively call the invoking method on each child. 
 
-### **Decorator**
+### **4. Decorator**
   - The decorator design pattern aka wrapper design pattern is a structural design pattern which can modify the existing behavior of an object by overriding the original calls from a decorator class.
   - The decorator pattern is somewhat similar to the adapter pattern, however the differences are:
      1. The adapter pattern deals with incompatible interfaces, where as the decorator extends preexisting object behavior at runtime.
@@ -274,7 +273,7 @@ public class MyMainClass() {
 
 - The image above is a representation of the decorator pattern. We have a generic interface called data source which has methods for reading and writing to a file. We have our component called FileDataSource which implements the interface and provides its own definitions for the interface's methods as well as any other additional behaviors. The decorator is represented by the class DataSourceDecorator which also implements the datasource interface. The DatasourceDecorator has a wrapped object of DataSource type which can be utilized in any of its methods. The concrete decorators, Encryption and Compression, extend the DatasourceDecorator class and provide their own implementation of the interface methods. Typically, the methods of the Encryption and Compression class will modify data before/after calling the super implementation of the invoked method. As an example, the encryption's writeData method will be called which will encrypt some data, after data is encrypted the writeData method will invoke the super implementation of writeData which will be the DataSourcDecorator. Finally, the DataSourceDecorator writeData method will invoke the writeData method defined by the wrapped object. In this case the wrapped object will write the data to a file. So in a sense, we have modified the wrapped object's writeData method by first encrypting the data before writing.
 
-### **Facade**
+### **5. Facade**
   - A facade design pattern is merely an interface or class which provides a high level abstraction of low level code.
   - An example is if we had some really complex code / classes that we wanted to abstract and instead of invoking their operations directly from the client, a Facade class could be used to abstract the complexity into a single method. Subsequently, the method can be invoked from the client making things easier to read.
   - A facade will consist of
@@ -285,7 +284,7 @@ public class MyMainClass() {
 
 - The image above demonstrates the Facade design pattern. The lower level, complex subystem classes are abstracted into simpler methods defined in the Facade. Note that the Facade will do all the heavy lifting in terms of working with the lower level code. Once the Facade class is constructed the client will invoke the abstracted methods defined by the facade.
 
-### **Flyweight**
+### **6. Flyweight**
   - Flyweight is simply a cache where duplicate or resuable data is extracted from the object itself and stored in a data structure where it can then be fetched. More specifically, extrinsic data should be extracted out of an object and stored in a data structure while intrinsic data should remain. Intrinsic data is data that is static for a certain object and lives within it, while extrinsic data is dynamic and can be accessed outside of the object. Extrinsic state can vary between objects, while intrinsic state should remain static throughout an object's lifecycle.
   - A flyweight refers to the object that only stores intrinsic state.
   - The flyweight design pattern consists of:
@@ -300,7 +299,7 @@ public class MyMainClass() {
 
 The image above is a representation of the flyweight design pattern. The Forest class is effectively a client which has a plantTree method. The plantTree method will retrieve a TreeType from the TreeType factory and then create a Tree object given some random extrinsic data. The intrinsic data for the flyweight (Treetype) is name, color, and texture, while the extrinsic data is the coordinates (x,y). The TreeFactory contains a HashMap of keys containing names which reference a specific flyweight object. 
 
-### **Proxy**
+### **7. Proxy**
   - A proxy is an intermediary object or class between the client and the actual service object. The main purpose of a proxy allows for data modification / manipulation before the data is transferred to the actual service.
   - The proxy consists of:
       1. Service interface which declares generic methods to be implemented by both the proxy and actual service
