@@ -300,4 +300,18 @@ public class MyMainClass() {
 
 The image above is a representation of the flyweight design pattern. The Forest class is effectively a client which has a plantTree method. The plantTree method will retrieve a TreeType from the TreeType factory and then create a Tree object given some random extrinsic data. The intrinsic data for the flyweight (Treetype) is name, color, and texture, while the extrinsic data is the coordinates (x,y). The TreeFactory contains a HashMap of keys containing names which reference a specific flyweight object. 
 
- 
+### **Proxy**
+  - A proxy is an intermediary object or class between the client and the actual service object. The main purpose of a proxy allows for data modification / manipulation before the data is transferred to the actual service.
+  - The proxy consists of:
+      1. Service interface which declares generic methods to be implemented by both the proxy and actual service
+      2. The Service class which implements the service interface and its methods according to some business logic
+      3. The proxy class which references the actual service class through composition. Once the proxy has manipulated or processed some sort of data, the data is subsequently passed to the actual service object.
+      4. Client which can interact with both the proxy and the client since it will defer any business logic to the generic service interface.
+  - An actual example of the proxy class could be a YoutubeDownloaderProxy which caches videos that are viewed to speed up initial load time. Our client will be a YoutubeDownloader class and will contain an API field which is utilized to "fetch" a video or popular videos. The service class is the 3rd party API class used for fetching. Every time a video is requested or when a list of videos are requested the service class will make a request and receive a response. Videos that have been requested previously will not be cached. In order to workaround network latency we could cache rerequested videos. In that case, we would need to create a proxy class for the service class. Both the service class and proxy class will implement the same interface allowing our YoutubeDownloader to work with both. The proxy class contains a field of the actual service class and will be utilized to make request. The main difference from the proxy and client class is that the proxy class will cache the responses and every time a similar request is made, the cache response will be returned instead of utilizing the service class to make another request.
+
+  - The image below is a representation of the example above.
+
+ ![Proxy](https://github.com/JustinHLe/Design-Patterns/assets/25164200/7e7c3d8f-61b6-4407-9880-f2e157ce5370)
+
+  - Proxies are also beneficial since we can extend behavior from a 3rd party library in which we do not have access to.
+
