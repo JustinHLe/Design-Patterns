@@ -217,6 +217,7 @@ public class MyMainClass() {
      3. On subsequent invocations of the getInstance() method, we do not reload the class since the class itself has already been loaded. Successive calls will return the preloaded Holder class and any of its static data, hence why new Singleton() is not invoked again.
 
   ## **Structural Design Patterns**
+  Patterns for managing large object structures and object type compatibility
 
 ### **1. Adapter**
   - An adapter is a structural design pattern which is used to convert data to specific formats for compatibility. In essence it converts the type of an object to be compatible with another object.
@@ -314,3 +315,4 @@ The image above is a representation of the flyweight design pattern. The Forest 
 
   - Proxies are also beneficial since we can extend behavior from a 3rd party library in which we do not have access to.
 
+## **Behavioral Design Patterns**
